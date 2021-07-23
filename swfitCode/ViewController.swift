@@ -37,6 +37,7 @@ class ViewController: UIViewController {
         playerLabyer.videoGravity = AVLayerVideoGravity.resizeAspect
         playView.layer.addSublayer(playerLabyer)
         player.play()
+        34535
     }
     
     //视频播放完毕
