@@ -43,6 +43,7 @@ class ViewController: UIViewController {
     @objc func playDidFinish() {
         player.seek(to: CMTime(value: 0, timescale: 1))
         player.play()
+        print("1234567890")
     }
 }
 
