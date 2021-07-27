@@ -8,10 +8,17 @@
 import UIKit
 import AVKit
 
+let screenWidth = UIScreen.main.bounds.size.width
+let screenHeight = UIScreen.main.bounds.size.height
+let SafeAreaBottomHeight = (UIScreen.main.bounds.size.height >= 812.0 ? 34 : 0)
+
+
 var playView:UIView!
 var player:AVPlayer!
 var playerLabyer:AVPlayerLayer!
 var playItem:AVPlayerItem!
+var showImage:UIImageView!
+var enterMainButton:UIButton!
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -20,6 +27,20 @@ class ViewController: UIViewController {
         playView = UIView.init(frame:UIScreen.main.bounds)
         view.addSubview(playView)
         playAV()
+        
+        showImage = UIImageView.init(frame: CGRect(x: screenWidth/2 - 100, y: screenHeight/2 - 90, width: 200, height: 180))
+        //showImage.alpha = 0
+        showImage.image = UIImage.init(named: "img_ricepon_logo_slogan")
+        view.addSubview(showImage)
+        
+        enterMainButton = UIButton.init(frame: CGRect(x: 20, y: screenHeight - 132 - CGFloat(SafeAreaBottomHeight), width: screenWidth - 40, height: 48))
+        enterMainButton.layer.cornerRadius = 8
+        enterMainButton.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        enterMainButton.backgroundColor = UIColor.init(cgColor: CGColor(red: 192/255.0, green: 28/255.0, blue: 66/255.0, alpha: 1))
+        enterMainButton.setTitle(NSLocalizedString("Scan QR Code", comment: ""), for: UIControl.State.normal)
+        enterMainButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 0)
+        enterMainButton.addTarget(self, action:#selector(enterMainAction), for: UIControl.Event.touchUpInside)
+        view .addSubview(enterMainButton)
         // Do any additional setup after loading the view.
     }
     
@@ -44,5 +65,11 @@ class ViewController: UIViewController {
         player.seek(to: CMTime(value: 0, timescale: 1))
         player.play()
     }
+    
+    //扫码二维码
+    @objc func enterMainAction(sender:UIButton){
+        print("%@",sender.frame)
+    }
 }
+
 
