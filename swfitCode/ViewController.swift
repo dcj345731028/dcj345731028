@@ -19,6 +19,7 @@ var playerLabyer:AVPlayerLayer!
 var playItem:AVPlayerItem!
 var showImage:UIImageView!
 var enterMainButton:UIButton!
+var qrcodeImage:UIImageView!
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -41,6 +42,15 @@ class ViewController: UIViewController {
         enterMainButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 0)
         enterMainButton.addTarget(self, action:#selector(enterMainAction), for: UIControl.Event.touchUpInside)
         view .addSubview(enterMainButton)
+        let string:NSString = NSLocalizedString("Scan QR Code", comment: "") as NSString
+        let font:UIFont! = UIFont.systemFont(ofSize: 20)
+        let attributes = [NSAttributedString.Key.font:font]
+        let option = NSStringDrawingOptions.usesLineFragmentOrigin
+        let rect:CGRect = string.boundingRect(with: CGSize(width: screenWidth, height: 48), options: option, attributes: attributes as [NSAttributedString.Key : Any], context: nil)
+        qrcodeImage = UIImageView.init(frame: CGRect(x: screenWidth/2 - rect.width/2 - 12.5, y: screenHeight - 120 - CGFloat(SafeAreaBottomHeight), width: 22, height: 22))
+        qrcodeImage.image = UIImage.init(named: "icn qr button")
+        view.addSubview(qrcodeImage)
+        
         // Do any additional setup after loading the view.
     }
     
